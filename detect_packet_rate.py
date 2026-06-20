@@ -1,4 +1,5 @@
 import csv
+from alert_engine import create_alert
 from collections import Counter
 
 packet_counts = Counter()
@@ -15,4 +16,9 @@ print("\nPacket Rate Analysis:\n")
 for ip, count in packet_counts.items():
 
     if count > 20:
-        print(f"[ALERT] High traffic from {ip} ({count} packets)")
+        create_alert(
+    "HIGH_TRAFFIC",
+    ip,
+    "MEDIUM",
+    f"High traffic detected ({count} packets)"
+    )

@@ -1,4 +1,5 @@
 import csv
+from alert_engine import create_alert
 from collections import Counter
 
 ip_counter = Counter()
@@ -16,6 +17,9 @@ print("\nAlerts:\n")
 for ip, count in ip_counter.items():
 
     if count > THRESHOLD:
-        print(
-            f"[ALERT] High traffic detected from {ip} ({count} packets)"
-        )
+        create_alert(
+    "EXCESSIVE_REQUESTS",
+    ip,
+    "LOW",
+    f"Excessive requests detected ({count} packets)"
+)

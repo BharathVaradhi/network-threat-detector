@@ -1,4 +1,5 @@
 import csv
+from alert_engine import create_alert
 from collections import defaultdict
 
 ip_ports = defaultdict(set)
@@ -20,7 +21,9 @@ for ip, ports in ip_ports.items():
     print(ip, len(ports), ports)
 
     if len(ports) > THRESHOLD:
-        print(
-            f"[ALERT] Possible port scan from {ip} "
-            f"({len(ports)} unique ports contacted)"
-        )
+        create_alert(
+    "PORT_SCAN",
+    ip,
+    "MEDIUM",
+    "Multiple destination ports detected"
+)
