@@ -5,6 +5,19 @@ app = FastAPI()
 
 
 @app.get("/alerts")
+def get_alerts():
+
+    alerts = []
+
+    with open("alerts.csv", "r") as file:
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            alerts.append(row)
+
+    return alerts
+
+
 @app.get("/alerts/{alert_type}")
 def get_alerts_by_type(alert_type):
 
@@ -31,14 +44,4 @@ def alert_summary():
             counts[row["alert_type"]] += 1
 
     return dict(counts)
-def get_alerts():
 
-    alerts = []
-
-    with open("alerts.csv", "r") as file:
-        reader = csv.DictReader(file)
-
-        for row in reader:
-            alerts.append(row)
-
-    return alerts
